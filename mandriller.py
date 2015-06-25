@@ -11,7 +11,6 @@ mandrill_client = None
 
 # Check if Mandril API Key exists in environment variable.
 if API_KEY != None:
-    print '++++ API_KEY: ', API_KEY
     mandrill_client = mandrill.Mandrill(API_KEY)
 
 # Raise warning message.
