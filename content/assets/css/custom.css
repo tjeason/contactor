@@ -1,0 +1,20 @@
+
+.btn-purple {
+  background-color: #6B00C2;
+  border-color: #6500B8;
+  color: #FFF;
+}
+
+.btn-purple:hover {
+  background-color: #6500B8;
+  color: #FFF;
+}
+
+.jumbotron-bkg {
+  background-color: #56D2C1 !important;
+  color: #FFF;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 12%;
+  padding-right: 12%;
+}

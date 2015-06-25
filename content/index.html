@@ -1,10 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Contactor</title>
 
   <!-- CSS -->
-  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+  <link type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+  <link type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css" rel="stylesheet">
+  <link type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+  <link type="text/css" href="/content/assets/css/custom.css" rel="stylesheet">
 
   <!-- HEAD JS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
@@ -12,11 +18,150 @@
 
 </head>
 <body>
-  <p>
-    Contactor is running.
-  </p>
+
+  <!-- Jumbotron -->
+  <div class="jumbotron jumbotron-bkg">
+    <h1>Contactor is running!</h1>
+    <p class="lead">Congrats! Your API Messaging Server is now running. Read the information below to get setup!</p>
+    <a class="btn btn-large btn-purple" href="https://github.com/tjeason/contactor">
+      README Doc on GitHub
+      <i class="fa fa-github fa-lg"></i>
+    </a>
+  </div>
+
+  <div class="container">
+
+   <!-- Example row of columns -->
+   <div class="row-fluid">
+     <div class="span4">
+       <h3>What is it?</h3>
+       <hr>
+       <p>
+         Contactor is a micro-service able to receive HTTP POST requests from a contact form on a static-site or app.
+         It supports blogs, GitHub Pages, and other web pages with no server-side code.
+         <a href="https://www.mailgun.com">Rackspace's Mailgun</a> and <a href="http://mandrill.com/">Mailchimp's Mandrill</a> for e-mail delivery are supported.
+       </p>
+     </div>
+     <div class="span4">
+       <h3>Setting up Environent Variables</h3>
+       <hr>
+        <p>
+         Contactor uses the host's system evironment variables to keep sensitive data,
+         such as API keys, safe from public access. The following ENVIRONMENT VARIABLES need to be set
+         for your Mailgun or Mandrill accounts before using Contactor as a service.
+        </p>
+
+        <br>
+
+        <h4>For Mailgun API Service</h4>
+        <div class="panel panel-default">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>MAILGUN_API_KEY</td>
+                <td>User account key for Mailgun for authorizing delivery e-mail messages.</td>
+              </tr>
+              <tr>
+                <td>MAILGUN_DOMAIN_NAME</td>
+                <td>Your website domain name provided by your DNS provider.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h4>For Mandrill API Service</h4>
+        <div class="panel panel-default">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Description</th>
+              </tr>
+              <tbody>
+                <tr>
+                  <td>MANDRILL_API_KEY</td>
+                  <td>User account key for Mandrill for authorizing delievery of e-mail messages.</td>
+                </tr>
+              </tbody>
+            </thead>
+          </table>
+        </div>
+
+        <h4>Example</h4>
+        For a Mac OS X/Linux evironment, you can set a Contactor Environment Variable by running the following command or in a script.
+        <br><br>
+        <span class="fa-stack fa-lg">
+          <i class="fa fa-square fa-stack-2x"></i>
+          <i class="fa fa-terminal fa-stack-1x fa-inverse"></i>
+        </span>
+        <code>
+          $: export MANDRIL_API_KEY={INSERT API KEY HERE}
+        </code>
+
+    </div>
+     <div class="span4">
+       <h3>Setting up Client-side Script</h3>
+       <hr>
+       <p>
+         For web apps with contact forms, you can use JavaScript with a click event handler on a submit button
+         to retreive the values from the text fields, and push the request to Contactor.
+       </p>
+       <p>
+         Here is an example using jQuery:
+       </p>
+       <br>
+       <pre class="prettyprint">
+         $(document).ready(function() {
+           $('#submit').click(function(event) {
+             var name = $('#NAME').val(),
+                 email = $('#EMAIL').val(),
+                 msg = $('#MSG').val();
+
+             $.ajax({
+               type: 'POST',
+               url: 'http://localhost:9000/md/send',
+               data: {
+                 'fromName': name,
+                 'fromEmail': email,
+                 'msg': msg,
+                 'subject': 'New Contact Message',
+                 'toEmail': 'support@company.com',
+                 'toName': 'Support'
+               }
+              }).done(function(response) {
+               console.log(response);
+             });
+             event.preventDefault();
+           });
+         });
+       </pre>
+     </div>
+   </div>
+
+   <hr>
+
+   <div class="footer">
+     <p>Contactor - An Open Source Project, version 0.1</p>
+   </div>
+
+ </div> <!-- /container -->
 
   <!-- BODY JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.js"></script>
   <script src="/content/assets/js/index.js"></script>
+  <script>
+    !function ($) {
+      $(function(){
+        window.prettyPrint && prettyPrint()
+      })
+    }(window.jQuery)
+  </script>
+
 </body>
 </html>
