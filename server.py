@@ -19,7 +19,7 @@ ServerClass = BaseHTTPServer.HTTPServer
 class ContactorRequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
     def do_GET(self):
         if self.path == '/':
-            print logColor.INFO + "[", time.asctime(), "] Getting index page." + logColor.END
+            print logColor.INFO + "[", time.asctime(), "] INFO: Getting index page." + logColor.END
             self.path = '/content/index.html'
 
         return SimpleHTTPServer.SimpleHTTPRequestHandler.do_GET(self)
@@ -48,17 +48,17 @@ class ContactorRequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
 
             # Mandrill API is sending the contact information.
             if self.path == '/md/send':
-                print logColor.INFO + "[", time.asctime(), "] Received Mandrill POST request." + logColor.END
+                print logColor.INFO + "[", time.asctime(), "] INFO: Received Mandrill POST request." + logColor.END
                 MandrillHandler().send_simple_message(from_name, from_email, to_name, to_email, subject, message)
 
             # Mailgun is sending the contact information.
             if self.path == '/mg/send':
-                print logColor.INFO + "[", time.asctime(), "] Received Mailgun POST request." + logColor.END
+                print logColor.INFO + "[", time.asctime(), "] INFO: Received Mailgun POST request." + logColor.END
                 MailGunHandler().send_simple_message(from_name, from_email, to_name, to_email, subject, message)
 
         # At least some contact form data is missing.
         else:
-            print logColor.ERROR + "[", time.asctime(), "] Could not retrieve contact information." + logColor.END
+            print logColor.ERROR + "[", time.asctime(), "] ERROR: Could not retrieve contact information." + logColor.END
 
         self.send_response(200)
         self.send_header("Content-type", "text/html")
@@ -90,9 +90,9 @@ if __name__ == "__main__":
         httpd = ServerClass(server_address, Handler)
         serv = httpd.socket.getsockname()
         showIntro()
-        print logColor.INFO + "[", time.asctime(), "] Serving running on", serv[0], "using port", serv[1], "..." + logColor.END
+        print logColor.INFO + "[", time.asctime(), "] INFO: Serving running on", serv[0], "using port", serv[1], "..." + logColor.END
         httpd.serve_forever()
 
     except KeyboardInterrupt:
-        print logColor.WARN + "[", time.asctime(), "] Server shutting down." + logColor.END
+        print logColor.WARN + "[", time.asctime(), "] WARN: Server shutting down." + logColor.END
         httpd.socket.close()

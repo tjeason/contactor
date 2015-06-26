@@ -13,7 +13,7 @@ API_KEY = os.environ.get('MAILGUN_API_KEY')
 class MailGunHandler:
     # Send a plain text message.
     def send_simple_message(self, from_name, from_email, to_name, to_email, subject, message):
-        print logColor.INFO + "[", time.asctime(), "] Sending contact message through Mailgun." + logColor.END
+        print logColor.INFO + "[", time.asctime(), "] INFO: Sending contact message through Mailgun." + logColor.END
 
         url = "https://api.mailgun.net/v3/%s/messages" % DOMAIN_NAME
 

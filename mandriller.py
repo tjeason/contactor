@@ -15,12 +15,12 @@ if API_KEY != None:
 
 # Raise warning message.
 else:
-    print logColor.WARN + "[", time.asctime(), "] Could not find your Mandrill API key. Make sure you have it assigned as an ENV $MANDRILL_API_KEY" + logColor.END
+    print logColor.WARN + "[", time.asctime(), "] INFO: Could not find your Mandrill API key. Make sure you have it assigned as an ENV $MANDRILL_API_KEY" + logColor.END
 
 class MandrillHandler:
     # Send a plain text message.
     def send_simple_message(self, from_name, from_email, to_name, to_email, subject, msg):
-        print logColor.INFO + "[", time.asctime(), "] Sending contact message through Mandrill." + logColor.END
+        print logColor.INFO + "[", time.asctime(), "] INFO: Sending contact message through Mandrill." + logColor.END
 
         try:
             message = {
@@ -54,5 +54,5 @@ class MandrillHandler:
 
         except mandrill.Error, e:
             # Mandrill errors are thrown as exceptions
-            print logColor.ERROR + "A mandrill error occurred: %s - %s" % (e.__class__, e) + logColor.END
+            print logColor.ERROR + "[", time.asctime(), "] ERROR: A mandrill error occurred: %s - %s" % (e.__class__, e) + logColor.END
             raise
