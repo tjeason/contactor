@@ -12,8 +12,8 @@ $(document).ready(function() {
         'fromEmail': email,
         'msg': msg,
         'subject': 'New Contact Message',
-        'toEmail': 'tjeason@outlook.com',
-        'toName': 'TJ Eason'
+        'toEmail': 'support@company.com',
+        'toName': 'Support'
       }
      }).done(function(response) {
       console.log(response);
