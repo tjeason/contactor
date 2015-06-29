@@ -84,7 +84,7 @@ if __name__ == "__main__":
         else:
             port = 9000
 
-        server_address = ('localhost', port)
+        server_address = ('0.0.0.0', port)
 
         Handler = ContactorRequestHandler
         httpd = ServerClass(server_address, Handler)

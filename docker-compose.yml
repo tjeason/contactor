@@ -1,0 +1,5 @@
+web:
+  build: .
+  command: python server.py 9000
+  ports:
+    - "9000:9000"
