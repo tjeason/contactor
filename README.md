@@ -31,7 +31,9 @@ for your USER API KEYS and DOMAIN NAMES.
 | Mailgun | Mandrill |
 | ------- | -------- |
 | MAILGUN_API_KEY | MANDRILL_API_KEY |
-| MAILGUN_DOMAIN_NAME | |
+| MAILGUN_DOMAIN_NAME | BCC_EMAIL (Optional) |
+| CC_EMAIL (Optional) | |
+| BCC_EMAIL (Optional) | | 
 
 *Example:*
 ```shell
