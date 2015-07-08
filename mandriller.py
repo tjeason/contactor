@@ -9,7 +9,8 @@ from log import logColor
 class MandrillHandler:
 
     def __init__(self):
-        self.API_KEY = os.environ.get('MANDRILL_API_KEY')
+        self.API_KEY = os.getenv('MANDRILL_API_KEY')
+        self.BCC_EMAIL = os.getenv("BCC_EMAIL", '')
 
         self.mandrill_client = None
 
@@ -19,7 +20,7 @@ class MandrillHandler:
 
         # Raise warning message.
         else:
-            print logColor.WARN + "[", time.asctime(), "] INFO: Could not find your Mandrill API key. Make sure you have it assigned as an ENV $MANDRILL_API_KEY" + logColor.END
+            print logColor.WARN + "[", time.asctime(), "] INFO: Could not find your Mandrill API key. Make sure you have it assigned as an ENV MANDRILL_API_KEY" + logColor.END
 
     # Send a plain text message.
     def send_simple_message(self, from_name, from_email, to_name, to_email, subject, msg):
@@ -29,6 +30,7 @@ class MandrillHandler:
             message = {
                 'auto_html': None,
                 'auto_text': None,
+                'bcc_address': self.BCC_EMAIL,
                 'from_email': from_email,
                 'from_name': from_name,
                 'global_merge_vars': [],
