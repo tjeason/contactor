@@ -3,15 +3,12 @@
 
 import BaseHTTPServer
 import cgi
-import csv
 import SimpleHTTPServer
 import sys
 import time
-
 from mailgunner import MailGunHandler
 from mandriller import MandrillHandler
 from log import logColor
-from SimpleHTTPServer import SimpleHTTPRequestHandler
 
 ServerClass = BaseHTTPServer.HTTPServer
 
@@ -45,6 +42,7 @@ class ContactorRequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             to_email = post_vars.get('toEmail', [''])[0]
             subject = post_vars.get('subject', [''])[0]
             message = post_vars.get('msg', [''])[0]
+            attachment = post_vars.get('attachment', [''])[0]
 
             # Mandrill API is sending the contact information.
             if self.path == '/md/send':
@@ -53,8 +51,12 @@ class ContactorRequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
 
             # Mailgun is sending the contact information.
             if self.path == '/mg/send':
-                print logColor.INFO + "[", time.asctime(), "] INFO: Received Mailgun POST request." + logColor.END
+                print logColor.INFO + "[", time.asctime(), "] INFO: Received Mailgun POST request. Sending message..." + logColor.END
                 MailGunHandler().send_simple_message(from_name, from_email, to_name, to_email, subject, message)
+
+            if self.path == '/mg/send/file':
+                print logColor.INFO + "[", time.asctime(), "] INFO: Received Mailgun POST request. Sending message with file attached..." + logColor.END
+                MailGunHandler().send_complex_message(from_name, from_email, to_email, subject, message, attachment)
 
         # At least some contact form data is missing.
         else:
