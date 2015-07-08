@@ -16,11 +16,11 @@ class MailGunHandler:
         self.DOMAIN_NAME = os.getenv('MAILGUN_DOMAIN_NAME')
 
         if self.API_KEY == None:
-            print logColor.ERROR + "[", time.asctime(), "] ERROR: Could not find Mailgun API key. Check your MAILGUN_API_KEY Environment Variable." + logColor.END
+            print logColor.WARN + "[", time.asctime(), "] WARN: Could not find Mailgun API key. Check your MAILGUN_API_KEY Environment Variable." + logColor.END
             return
 
         if self.DOMAIN_NAME == None:
-            print logColor.ERROR + "[", time.asctime(), "] ERROR: Could not find Mailgun domain name. Check your MAILGUN_DOMAIN_NAME Environment Variable." + logColor.END
+            print logColor.WARN + "[", time.asctime(), "] WARN: Could not find Mailgun domain name. Check your MAILGUN_DOMAIN_NAME Environment Variable." + logColor.END
             return
 
         self.CC_EMAIL = os.getenv("CC_EMAIL", '')
