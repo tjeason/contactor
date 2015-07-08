@@ -6,18 +6,21 @@ import time
 import mandrill
 from log import logColor
 
-API_KEY = os.environ.get('MANDRILL_API_KEY')
-mandrill_client = None
-
-# Check if Mandril API Key exists in environment variable.
-if API_KEY != None:
-    mandrill_client = mandrill.Mandrill(API_KEY)
-
-# Raise warning message.
-else:
-    print logColor.WARN + "[", time.asctime(), "] INFO: Could not find your Mandrill API key. Make sure you have it assigned as an ENV $MANDRILL_API_KEY" + logColor.END
-
 class MandrillHandler:
+
+    def __init__(self):
+        self.API_KEY = os.environ.get('MANDRILL_API_KEY')
+
+        self.mandrill_client = None
+
+        # Check if Mandril API Key exists in environment variable.
+        if self.API_KEY != None:
+            self.mandrill_client = mandrill.Mandrill(self.API_KEY)
+
+        # Raise warning message.
+        else:
+            print logColor.WARN + "[", time.asctime(), "] INFO: Could not find your Mandrill API key. Make sure you have it assigned as an ENV $MANDRILL_API_KEY" + logColor.END
+
     # Send a plain text message.
     def send_simple_message(self, from_name, from_email, to_name, to_email, subject, msg):
         print logColor.INFO + "[", time.asctime(), "] INFO: Sending contact message through Mandrill." + logColor.END
@@ -50,7 +53,7 @@ class MandrillHandler:
                 'url_strip_qs': None,
                 'view_content_link': None
             }
-            result = mandrill_client.messages.send(message=message, async=False, ip_pool='Main Pool', send_at=None)
+            self.mandrill_client.messages.send(message=message, async=False, ip_pool='Main Pool', send_at=None)
 
         except mandrill.Error, e:
             # Mandrill errors are thrown as exceptions
