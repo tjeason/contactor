@@ -33,7 +33,7 @@ for your USER API KEYS and DOMAIN NAMES.
 | MAILGUN_API_KEY | MANDRILL_API_KEY |
 | MAILGUN_DOMAIN_NAME | BCC_EMAIL (Optional) |
 | CC_EMAIL (Optional) | |
-| BCC_EMAIL (Optional) | | 
+| BCC_EMAIL (Optional) | |
 
 *Example:*
 ```shell
@@ -91,10 +91,8 @@ A jQuery code snippet that can be used in the `<script>` tag of an HTML file or 
 ```
 
 ### Roadmap
-
- + Docker setup
  + Heroku deployment setup
- + Send messages with file attachments
+ + Send messages with file attachments (WIP)
 
 ### License
 
