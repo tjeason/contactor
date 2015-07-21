@@ -2,3 +2,6 @@
 *.pyc
 *.yml
 Dockerfile
+Procfile
+.env_template
+venv/
