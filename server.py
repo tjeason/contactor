@@ -46,14 +46,20 @@ class ContactorRequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
 
             # Mandrill API is sending the contact information.
             if self.path == '/md/send':
-                print logColor.INFO + "[", time.asctime(), "] INFO: Received Mandrill POST request." + logColor.END
+                print logColor.INFO + "[", time.asctime(), "] INFO: Received Mandrill POST request. Sending message..." + logColor.END
                 MandrillHandler().send_simple_message(from_name, from_email, to_name, to_email, subject, message)
+
+            # Mandrill API is sending the contact information with an attached file.
+            if self.path == '/md/send/file':
+                print logColor.INFO + "[", time.asctime(), "] INFO: Received Mandrill POST request. Sending message with file attached..." + logColor.END
+                MandrillHandler().send_complex_message(from_name, from_email, to_email, to_name, subject, message, attachment)
 
             # Mailgun is sending the contact information.
             if self.path == '/mg/send':
                 print logColor.INFO + "[", time.asctime(), "] INFO: Received Mailgun POST request. Sending message..." + logColor.END
                 MailGunHandler().send_simple_message(from_name, from_email, to_name, to_email, subject, message)
 
+            # Mailgun is sending the contact information with an attached file.
             if self.path == '/mg/send/file':
                 print logColor.INFO + "[", time.asctime(), "] INFO: Received Mailgun POST request. Sending message with file attached..." + logColor.END
                 MailGunHandler().send_complex_message(from_name, from_email, to_email, subject, message, attachment)
@@ -92,7 +98,7 @@ if __name__ == "__main__":
         httpd = ServerClass(server_address, Handler)
         serv = httpd.socket.getsockname()
         showIntro()
-        print logColor.INFO + "[", time.asctime(), "] INFO: Serving running on", serv[0], "using port", serv[1], "..." + logColor.END
+        print logColor.INFO + "[", time.asctime(), "] INFO: Serving running on", serv[0], "using port", serv[1], ". Use Control-C to shutdown the server..." + logColor.END
         httpd.serve_forever()
 
     except KeyboardInterrupt:
