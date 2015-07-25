@@ -3,6 +3,7 @@
 
 import base64
 import mandrill
+import mimetypes
 import os
 import time
 
@@ -71,7 +72,7 @@ class MandrillHandler:
         with open(attachment) as attached_file:
             content = base64.b64encode(attached_file.read())
 
-        file_type = magic.from_file(attachment, mime=True)
+        file_type = mimetypes.guess_type(attachment)[0]
 
         try:
             message = {
