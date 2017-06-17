@@ -19,13 +19,21 @@ class ContactorRequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             print logColor.INFO + "[", time.asctime(), "] INFO: Getting index page." + logColor.END
             self.path = '/content/index.html'
 
+        if self.path == '/test':
+            self.path = '/content/test.html'
+
         return SimpleHTTPServer.SimpleHTTPRequestHandler.do_GET(self)
 
     def do_POST(self):
         ctype, pdict = cgi.parse_header(self.headers.getheader('content-type'))
 
+        print "+++++ ctype:", ctype
+
         if ctype == 'multipart/form-data':
+            print "+++++ self.rfile:", self.rfile
+            print "+++++ pdict:", pdict
             post_vars = cgi.parse_multipart(self.rfile, pdict)
+            print "+++++ post_vars:", post_vars
 
         elif ctype == 'application/x-www-form-urlencoded':
             length = int(self.headers.getheader('content-length'))
