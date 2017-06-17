@@ -2,6 +2,21 @@
 
 [![Build Status](https://travis-ci.org/tjeason/contactor.svg?branch=master)](https://travis-ci.org/tjeason/contactor)
 
+```
+_________                __                 __
+   \_   ___ \  ____   _____/  |______    _____/  |_  _____________
+   /    \  \/ /  _ \ /    \   __\__  \ _/ ___\   __\/  _ \_  __  /
+   \     \___(  <_> )   |  \  |  / __ \  \___|  | (  <_> )  |  \/
+    \______  /\____/|___|  /__| (____  /\___  >__|  \____/|__|
+           \/            \/          \/     \/
+
+[ Sat Jun 17 15:01:59 2017 ] INFO: Serving running on 0.0.0.0 using port 9000 . Use Control-C to shutdown the server...
+[ Sat Jun 17 15:02:19 2017 ] INFO: Getting index page.
+127.0.0.1 - - [17/Jun/2017 15:02:19] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [17/Jun/2017 15:02:19] "GET /content/assets/css/custom.css HTTP/1.1" 200 -
+127.0.0.1 - - [17/Jun/2017 15:02:19] "GET /content/assets/js/index.js HTTP/1.1" 200 -
+```
+
 A Python-based API server for static websites with contact forms. Contactor supports
 Rackspace's Mailgun API service and MailChimp's Mandrill API service.
 
@@ -49,6 +64,9 @@ Check if Contactor is running by connecting to the URL in your web browser.
 `http://localhost:9000/`
 
 REST API to send a contact form message using Mailgun as a HTTP POST request.
+
+![image](https://user-images.githubusercontent.com/7929408/27255938-6cda390c-536e-11e7-987b-390c2dec5a6d.png)
+
 
 *Example:*
 `http://localhost:9000/mg/send`
